@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+
+/* Solo lo que Ant Design no cubre. Colores del tema vía var(--ant-*); fijos solo los de marca */
+
+.login {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: var(--ant-color-bg-layout);
+}
+
+/* ---------- Curvas de fondo ---------- */
+
+.login__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.login__bg-line {
+    fill: none;
+    stroke: #EE7F12;
+    stroke-width: 1.5;
+    stroke-opacity: 0.5;
+}
+
+.login__bg-line--mar {
+    stroke: #1E9BD7;
+}
+
+.login__main {
+    position: relative;
+    flex: 1;
+    padding: 40px 16px 24px;
+}
+
+/* ---------- Identidad ---------- */
+
+.login__shield {
+    width: clamp(64px, 12vw, 88px);
+    height: auto;
+}
+
+.login__identity .ant-typography {
+    font-family: Montserrat, Inter, sans-serif;
+    letter-spacing: 0.04em;
+}
+
+.login__name.ant-typography {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: 0;
+    color: var(--ant-color-primary);
+}
+
+.login__motto.ant-typography {
+    margin-top: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ant-color-border);
+    font-size: clamp(0.8rem, 2.4vw, 1rem);
+}
+
+.login__gov.ant-typography {
+    margin-top: 6px;
+    font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+    color: var(--ant-color-primary);
+}
+
+.login__period.ant-typography {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+}
+
+/* ---------- Tarjeta del formulario ---------- */
+
+.login__card.ant-card {
+    width: 100%;
+    max-width: 440px;
+    background: color-mix(in srgb, var(--ant-color-bg-container) 80%, transparent);
+    backdrop-filter: blur(12px);
+    border-top: 4px solid #EE7F12;
+    box-shadow: var(--ant-box-shadow-tertiary);
+}
+
+.login__title.ant-typography {
+    margin-top: 0;
+    font-family: Montserrat, Inter, sans-serif;
+    font-weight: 800;
+}
+
+.login__label {
+    font-weight: 500;
+}
+
+.login__help {
+    display: block;
+}
+
+.login__footer {
+    max-width: 440px;
+    text-align: center;
+}
+
+/* ---------- Ola institucional al pie ---------- */
+
+.login__wave {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: clamp(56px, 10vw, 110px);
+}
+
+.login__wave-water {
+    fill: #1E9BD7;
+}
+
+.login__wave-line {
+    fill: none;
+    stroke: #EE7F12;
+    stroke-width: 6;
+}
+
+/* Más aire entre el ícono y el texto de los campos */
+.login__card .ant-input-prefix {
+    margin-inline-end: 10px;
+    color: var(--ant-color-text-tertiary);
+}

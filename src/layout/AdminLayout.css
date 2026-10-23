@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+
+/* Sider, header y contenido siguen el tema vía var(--ant-*); fijos solo los colores de marca */
+
+.admin {
+    min-height: 100vh;
+}
+
+/* ---------- Menú lateral ---------- */
+
+.admin__sider.ant-layout-sider {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--ant-color-border-secondary);
+}
+
+.admin__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 64px;
+    padding: 0 16px;
+    overflow: hidden;
+}
+
+.admin__shield {
+    flex: none;
+    width: 36px;
+    height: auto;
+}
+
+.admin__brand-text {
+    flex: 1;
+    min-width: 0;
+    font-family: Montserrat, Inter, sans-serif;
+    line-height: 1.15;
+    white-space: nowrap;
+}
+
+.admin__name {
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: var(--ant-color-primary);
+}
+
+.admin__gov {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ant-color-text-secondary);
+}
+
+/* Franja naranja + mar, como el escudo */
+.admin__stripe {
+    height: 4px;
+    margin-bottom: 8px;
+    background: linear-gradient(#EE7F12 0 50%, #1E9BD7 50% 100%);
+}
+
+/* El Sider ya tiene el borde derecho */
+.admin__menu.ant-menu {
+    border-inline-end: 0 !important;
+}
+
+/* ---------- Header (sigue el tema) ---------- */
+
+.admin__header.ant-layout-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px 0 0;
+    background: var(--ant-color-bg-container);
+    border-bottom: 1px solid var(--ant-color-border-secondary);
+    line-height: normal;
+}
+
+.admin__toggle.ant-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 16px;
+}
+
+.admin__title.ant-typography {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin__user.ant-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+}
+
+.admin__avatar.ant-avatar {
+    background: #1E9BD7;
+}
+
+.admin__user-caret {
+    font-size: 10px;
+    color: var(--ant-color-text-tertiary);
+}
+
+/* ---------- Contenido ---------- */
+
+.admin__content {
+    margin: 24px 16px 0;
+    padding: 24px;
+    min-height: 280px;
+    background: var(--ant-color-bg-container);
+    border-radius: var(--ant-border-radius-lg);
+}
+
+.admin__footer.ant-layout-footer {
+    padding: 16px 24px;
+    background: transparent;
+    text-align: center;
+}
+
+.admin__backdrop {
+    display: none;
+}
+
+/* Móvil: el Sider queda fijo y al abrirse pasa encima del contenido en vez de aplastarlo */
+@media (max-width: 575px) {
+    .admin__sider.ant-layout-sider {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 30;
+    }
+
+    .admin__main {
+        margin-left: 80px;
+    }
+
+    .admin__backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 25;
+        background: var(--ant-color-bg-mask);
+    }
+
+    .admin__user-name {
+        display: none;
+    }
+
+    /* Se oculta pero conserva su espacio para empujar el usuario a la derecha */
+    .admin__title.ant-typography {
+        visibility: hidden;
+    }
+
+    .admin__content {
+        margin: 16px 8px 0;
+        padding: 16px;
+    }
+}
