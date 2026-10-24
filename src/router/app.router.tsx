@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter, Navigate } from "react-router";
+import { /*createBrowserRouter,*/ Navigate, createHashRouter } from "react-router";
 import { LoginPage } from "../auth/pages/LoginPage";
 import { AdminRoute, NotAuthenticatedRoute } from "./ProtectedRoutes";
 import { Spin } from "antd";
@@ -12,7 +12,7 @@ const AuthLayout = lazy(() => import('../auth/layouts/AuthLayout'));
 const AdminLayout = lazy(() => import('../layout/AdminLayout'));
 
 
-export const AppRouter = createBrowserRouter([
+export const AppRouter = createHashRouter([
     {
         path: '/auth',
         element:
