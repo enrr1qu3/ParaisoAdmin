@@ -8,12 +8,19 @@ export interface IDocumentParams {
     pageSize?: number;
 }
 
-// Se envía como multipart/form-data. En PUT file es opcional y, si viene, reemplaza al actual
+// El archivo se sube directo a Blob; al backend solo viaja el blobName. En PUT file es opcional y, si viene, reemplaza al actual
 export interface IDocumentRequest {
     numSemester?: number | null; // opcional, 1-4
     year?: number | null;        // opcional, solo el año
     subSectionId: number;
     file?: File;
+}
+
+export interface IDocumentUploadUrlResponse {
+    blobName: string;
+    uploadUrl: string; // SAS de solo escritura, válido 2 horas
+    expiresOn: string;
+    tags: Record<string, string>;
 }
 
 export interface IDocumentResponse {
@@ -28,4 +35,4 @@ export interface IDocumentResponse {
 
 export const DOCUMENT_SEMESTER_OPTIONS = [1, 2, 3, 4].map((n) => ({ value: n, label: `Semestre ${n}` }));
 
-export const MAX_DOCUMENT_SIZE_MB = 500;
+export const MAX_DOCUMENT_SIZE_MB = 600;

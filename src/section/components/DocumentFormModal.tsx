@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form, InputNumber, Modal, Select, Upload, notification, type UploadFile } from "antd";
+import { Button, Form, InputNumber, Modal, Progress, Select, Upload, notification, type UploadFile } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { isAxiosError } from "axios";
 import { createDocumentAction, updateDocumentAction } from "../actions/document.action";
@@ -25,14 +25,16 @@ export const DocumentFormModal = ({ open, onClose, onSaved, subSectionId, docume
     const [form] = Form.useForm<FormValues>();
     const [api, contextHolder] = notification.useNotification();
     const [saving, setSaving] = useState(false);
+    // null = no hay subida en curso (p. ej. al editar sin archivo nuevo)
+    const [percent, setPercent] = useState<number | null>(null);
     const isEdit = !!document;
 
     const onFinish = async ({ numSemester, year, fileList }: FormValues) => {
         setSaving(true);
         const body = { numSemester: numSemester ?? null, year: year ?? null, subSectionId, file: fileList?.[0]?.originFileObj };
         try {
-            if (document) await updateDocumentAction(document.id, body);
-            else await createDocumentAction(body);
+            if (document) await updateDocumentAction(document.id, body, setPercent);
+            else await createDocumentAction(body, setPercent);
             api.success({
                 title: isEdit ? 'Documento actualizado' : 'Documento subido',
                 description: isEdit ? 'Los cambios se guardaron correctamente.' : 'El documento se subió correctamente.',
@@ -47,6 +49,7 @@ export const DocumentFormModal = ({ open, onClose, onSaved, subSectionId, docume
             });
         } finally {
             setSaving(false);
+            setPercent(null);
         }
     };
 
@@ -92,10 +95,11 @@ export const DocumentFormModal = ({ open, onClose, onSaved, subSectionId, docume
                         ]}
                     >
                         {/* beforeUpload false: el archivo se guarda en el form y se envía al confirmar */}
-                        <Upload beforeUpload={() => false} maxCount={1}>
+                        <Upload beforeUpload={() => false} maxCount={1} disabled={saving}>
                             <Button icon={<UploadOutlined />}>Seleccionar archivo</Button>
                         </Upload>
                     </Form.Item>
+                    {percent !== null && <Progress percent={percent} status={percent < 100 ? 'active' : 'success'} />}
                 </Form>
             </Modal>
         </>
