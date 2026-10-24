@@ -2,6 +2,7 @@
   "name": "paraisoadmin",
   "private": true,
   "version": "0.0.0",
+  "description": "Panel de administración del H. Ayuntamiento Constitucional de Paraíso, Tabasco (2024–2027)",
   "type": "module",
   "scripts": {
     "dev": "vite",
